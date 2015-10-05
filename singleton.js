@@ -1,3 +1,3 @@
-import MemoryFileSystem from './src/memory-file-system';
+import MemoryFileSystem from './src/index';
 let fs = new MemoryFileSystem()
 export default fs;

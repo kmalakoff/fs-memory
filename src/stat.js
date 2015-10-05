@@ -4,8 +4,8 @@ export default class Stat {
     if (this.node.data.stat) Object.assign(this, this.node.data.stat);
   }
 
-  isFile() { return !this.node.isDirectory; }
-  isDirectory() { return this.node.isDirectory; }
+  isFile() { return !this.node.data.isDirectory; }
+  isDirectory() { return this.node.data.isDirectory; }
   isBlockDevice() { return false; }
   isCharacterDevice() { return false; }
   isSymbolicLink() { return false; }

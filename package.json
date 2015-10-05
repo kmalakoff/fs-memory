@@ -24,6 +24,7 @@
   "homepage": "https://github.com/kmalakoff/fs-memory#readme",
   "dependencies": {
     "browser-path": "0.0.1",
+    "errno": "^0.1.4",
     "forestry": "^0.4.1"
   }
 }

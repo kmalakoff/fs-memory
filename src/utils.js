@@ -1,13 +1,26 @@
 import path from 'path';
+import _ from 'lodash';
 
-export function findChild(node, name) { return node.children.find(childNode => childNode.data.name === name); }
+export function isName(name) { return (name !== '.') && (name !== '..'); }
 
-export function findNode(node, fullPath) {
-  let current = node;
+export function findNextNode(node, name) {
+  switch(name) {
+    case '.': return node;
+    case '..': return node.parent;
+    default: return _.find(node.children, childNode => childNode.data.name == name);
+  }
+}
+
+export function findNode(current, fullPath) {
   let pathParts = fullPath.split(path.sep);
 
-  for (let name in pathParts) {
-    current = current.find(node => node.data.name == name);
+  // root
+  let rootName = pathParts.shift();
+  if (current.data.name !== rootName) return null;
+
+  // children
+  for (let name of pathParts) {
+    current = findNextNode(current, name)
     if (!current) return null;
   }
   return current;
