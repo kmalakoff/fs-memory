@@ -1,0 +1,29 @@
+{
+  "name": "fs-memory",
+  "version": "1.0.0",
+  "description": "An in-memory file system implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmalakoff/fs-memory.git"
+  },
+  "keywords": [
+    "fs",
+    "memory",
+    "webpack",
+    "test"
+  ],
+  "author": "https://github.com/kmalakoff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kmalakoff/fs-memory/issues"
+  },
+  "homepage": "https://github.com/kmalakoff/fs-memory#readme",
+  "dependencies": {
+    "browser-path": "0.0.1",
+    "forestry": "^0.4.1"
+  }
+}
