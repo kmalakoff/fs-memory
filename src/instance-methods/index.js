@@ -1,4 +1,5 @@
 import dz from 'dezalgo';
+import _ from 'lodash';
 
 import existsSync from './existsSync';
 import lstatSync from './lstatSync';
@@ -23,9 +24,10 @@ let instanceMethods = {
 
 // async generated methods
 ['lstat', 'mkdir', 'readdir', 'readFile', 'realpath', 'stat'].forEach(name => {
-  instanceMethods[name] = function(...args) {
+  instanceMethods[name] = function() {
+    let args = _.toArray(arguments);
     let result, callback = dz(args.pop());
-    try { result = this[`${name}Sync`](...args); } catch(err) { return callback(err); }
+    try { result = this[`${name}Sync`].apply(this, args); } catch(err) { return callback(err); }
     return callback(null, result);
   };
 });
