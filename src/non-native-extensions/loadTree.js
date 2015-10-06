@@ -9,7 +9,7 @@ function createNode(dataNode) {
   return node
 }
 
-export function _loadTree(dataNode) {
+export default function __loadTree(dataNode) {
   let fs = this;
   fs.rootNode = createNode(dataNode);
 }
