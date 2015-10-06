@@ -7,5 +7,5 @@ export default function readFileSync(fullPath, encoding) {
   if (node.data.isDirectory) throw new Error(`Cannot readFile on a directory ${fullPath}`);
 
   let contents = bodec.fromRaw(node.data.contents);
-  return encoding ? contents.toString(encoding) : contents;
+  return encoding ? bodec.toString(contents, encoding) : contents;
 }
