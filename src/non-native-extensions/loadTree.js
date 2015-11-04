@@ -1,5 +1,6 @@
 import path from 'path';
 import {Node} from 'forestry';
+import bodec from 'bodec';
 
 var TIME_PROPERTIES = ['atime', 'mtime', 'ctime', 'birthtime'];
 
@@ -11,6 +12,7 @@ function deserializeData(data) {
       if (data.stat.hasOwnProperty(time)) data.stat[time] = new Date(data.stat[time]);
     })
   }
+  if (data.contents) data.contents = bodec.fromRaw(data.contents)
   return data;
 }
 

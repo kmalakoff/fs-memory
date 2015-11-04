@@ -9,6 +9,7 @@ import readdirSync from './readdirSync';
 import readFileSync from './readFileSync';
 import realpathSync from './realpathSync';
 import statSync from './statSync';
+import writeFileSync from './writeFileSync';
 
 // sync methods
 let instanceMethods = {
@@ -19,11 +20,12 @@ let instanceMethods = {
   readdirSync,
   readFileSync,
   realpathSync,
-  statSync
+  statSync,
+  writeFileSync
 };
 
 // async generated methods
-['lstat', 'mkdir', 'readdir', 'readFile', 'realpath', 'stat'].forEach(name => {
+['lstat', 'mkdir', 'readdir', 'readFile', 'realpath', 'stat', 'writeFile'].forEach(name => {
   instanceMethods[name] = function() {
     let args = _.toArray(arguments);
     let result, callback = dz(args.pop());

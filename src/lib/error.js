@@ -1,4 +1,4 @@
-export default class MemoryFileSystemError extends Error {
+export default class FSError extends Error {
   constructor(err, path) {
     super()
     if (Error.captureStackTrace) Error.captureStackTrace(this, arguments.callee)
