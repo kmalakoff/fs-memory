@@ -1,3 +1,3 @@
-export default function lstatSyncNoException(fullPath) {
-  try { return this.lstatSync(fullPath) } catch (err) {}
+export default function lstatSyncNoException(path) {
+  try { return this.lstatSync(path) } catch (err) {}
 }

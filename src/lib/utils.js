@@ -14,8 +14,8 @@ export function findNextNode(node, name) {
   }
 }
 
-export function findNode(current, fullPath) {
-  let pathParts = fullPath.split(sep);
+export function findNode(current, path) {
+  let pathParts = path.split(sep);
 
   // root
   if (pathParts[0] == '') {

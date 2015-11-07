@@ -4,8 +4,8 @@ import ERRORS from 'errno';
 import FSError from '../lib/error';
 import {findNode, findOrCreateChildNode, writeData} from '../lib/utils';
 
-export default function writeFileSync(fullPath, data, encoding) {
-  let pathParts = fullPath.split(sep);
+export default function writeFileSync(path, data, encoding) {
+  let pathParts = path.split(sep);
   let name = pathParts[pathParts.length-1];
   let parentFullPath = pathParts.slice(0, pathParts.length-1).join(sep);
   let parentNode = findNode(this.rootNode, parentFullPath);

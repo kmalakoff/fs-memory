@@ -1,3 +1,3 @@
-export default function lstatSync(fullPath) {
-  return this.statSync(fullPath);
+export default function lstatSync(path) {
+  return this.statSync(path);
 }
