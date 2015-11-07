@@ -34,4 +34,13 @@ let instanceMethods = {
   };
 });
 
+// async generated methods - non-standard
+['exists'].forEach(name => {
+  instanceMethods[name] = function() {
+    let args = _.toArray(arguments);
+    let result, callback = dz(args.pop());
+    callback(this[`${name}Sync`].apply(this, args));
+  };
+});
+
 export default instanceMethods;
