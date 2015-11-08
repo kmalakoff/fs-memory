@@ -3,6 +3,7 @@ import _ from 'lodash';
 import bodec from 'bodec';
 import ERRORS from 'errno';
 import FSError from '../lib/error';
+import {Node} from 'forestry';
 
 export function isName(name) { return (name !== '.') && (name !== '..'); }
 
@@ -10,7 +11,7 @@ export function findNextNode(node, name) {
   switch(name) {
     case '.': return node;
     case '..': return node.parent;
-    default: return _.find(node.children, childNode => childNode.data.name == name);
+    default: return findChild(node, name);
   }
 }
 
@@ -32,7 +33,9 @@ export function findNode(current, path) {
   return current;
 }
 
-export function findOrCreateChildNode(parentNode, options) {
+export function findChild(node, name) { return _.find(node.children, childNode => childNode.data.name === name); };
+
+export function findOrCreateChild(parentNode, options) {
   if (!parentNode.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, parentNode.data.pathParts.join(sep));
   let node = findNextNode(parentNode, options.name);
   if (!node) {
