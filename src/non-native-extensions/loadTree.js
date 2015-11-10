@@ -2,13 +2,13 @@ import path from 'path';
 import {Node} from 'forestry';
 import bodec from 'bodec';
 
-var TIME_PROPERTIES = ['atime', 'mtime', 'ctime', 'birthtime'];
+var DATE_PROPERTIES = ['atime', 'mtime', 'ctime', 'birthtime'];
 
 function deserializeData(data) {
   var data = Object.assign({}, data);
   if (data.stat) {
     data.stat = Object.assign({}, data.stat);
-    TIME_PROPERTIES.forEach(function(time) {
+    DATE_PROPERTIES.forEach(function(time) {
       if (data.stat.hasOwnProperty(time)) data.stat[time] = new Date(data.stat[time]);
     })
   }
