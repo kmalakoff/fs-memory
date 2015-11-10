@@ -1,11 +1,11 @@
 export default class Stat {
   constructor(node) {
-    this.node = node;
-    if (this.node.data.stat) Object.assign(this, this.node.data.stat);
+    Object.assign(this, node.data.stat || {});
+    if (node.data.isDirectory) this.__d = true;
   }
 
-  isFile() { return !this.node.data.isDirectory; }
-  isDirectory() { return this.node.data.isDirectory; }
+  isFile() { return !this.__d }
+  isDirectory() { return this.__d }
   isBlockDevice() { return false; }
   isCharacterDevice() { return false; }
   isSymbolicLink() { return false; }
