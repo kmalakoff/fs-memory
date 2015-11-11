@@ -17,5 +17,6 @@ export default function renameSync(oldPath, newPath) {
     if (!!existingNode.data.isDirectory !== !!node.data.isDirectory) throw new FSError(ERRORS.code.EISDIR, options.name);
     removeChild(node.parent, existingNode.data.name);
   }
+  node.data.name = name;
   parentNode.addChild(node);
 }

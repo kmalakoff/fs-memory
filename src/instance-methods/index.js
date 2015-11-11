@@ -1,5 +1,5 @@
-import dz from 'dezalgo';
 import _ from 'lodash';
+import dz from 'dezalgo';
 
 import existsSync from './existsSync';
 import lstatSync from './lstatSync';
