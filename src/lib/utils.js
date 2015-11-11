@@ -34,18 +34,26 @@ export function findNode(current, path) {
 }
 
 export function findChild(node, name) { return _.find(node.children, childNode => childNode.data.name === name); };
+export function removeChild(node, name) {
+  let index = _.findIndex(node.children, childNode => childNode.data.name === name);
+  if (index<0) throw new FSError(ERRORS.code.ENOENT);
+  node.children.splice(index, 1);
+};
 
 export function findOrCreateChild(parentNode, options) {
   if (!parentNode.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, parentNode.name);
   let node = findNextNode(parentNode, options.name);
-  if (!node) {
+  if (node) {
+    if (!!node.data.isDirectory !== !!options.isDirectory) throw new FSError(ERRORS.code.EISDIR, options.name);
+  }
+  else {
     let data = _.clone(options);
     if (!data.stat) {
       let now = new Date();
       data.stat = {size: 0, ctime: now, mtime: now, birthtime: now};
     }
     node = new Node(data);
-    parentNode.children.push(node);
+    parentNode.addChild(node);
   }
   return node;
 }
