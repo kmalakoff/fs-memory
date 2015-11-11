@@ -1,6 +1,5 @@
 import {sep} from 'path';
 import _ from 'lodash';
-import bodec from 'bodec';
 import ERRORS from 'errno';
 import FSError from '../lib/error';
 import {Node} from 'forestry';
@@ -33,37 +32,17 @@ export function findNode(current, path) {
   return current;
 }
 
-export function findChild(node, name) { return _.find(node.children, childNode => childNode.data.name === name); };
+export function findChild(node, name) {
+  if (!node.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, node.name);
+  return _.find(node.children, childNode => childNode.data.name === name);
+};
 export function removeChild(node, name) {
   let index = _.findIndex(node.children, childNode => childNode.data.name === name);
   if (index<0) throw new FSError(ERRORS.code.ENOENT);
+  let childNode = node.children[index];
   node.children.splice(index, 1);
+  return childNode;
 };
-
-export function findOrCreateChild(parentNode, options) {
-  if (!parentNode.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, parentNode.name);
-  let node = findNextNode(parentNode, options.name);
-  if (node) {
-    if (!!node.data.isDirectory !== !!options.isDirectory) throw new FSError(ERRORS.code.EISDIR, options.name);
-  }
-  else {
-    let data = _.clone(options);
-    if (!data.stat) {
-      let now = new Date();
-      data.stat = {size: 0, ctime: now, mtime: now, birthtime: now};
-    }
-    node = new Node(data);
-    parentNode.addChild(node);
-  }
-  return node;
-}
-
-export function writeData(node, data, encoding) {
-  if (node.data.isDirectory) throw new FSError(ERRORS.code.EISDIR, node.name);
-  node.data.contents = encoding ? bodec.fromString(data, encoding) : bodec.copy(data);
-  node.data.stat = _.defaults({size: node.data.contents.length, mtime: new Date()}, node.data.stat || {})
-  return node;
-}
 
 export const isWindows = process.platform === 'win32';
 

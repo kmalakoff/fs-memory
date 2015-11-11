@@ -11,6 +11,7 @@ import realpathSync from './realpathSync';
 import renameSync from './renameSync';
 import statSync from './statSync';
 import unlinkSync from './unlinkSync';
+import watch from './watch';
 import writeFileSync from './writeFileSync';
 
 // sync methods
@@ -23,6 +24,7 @@ let instanceMethods = {
   renameSync,
   statSync,
   unlinkSync,
+  watch,
   writeFileSync
 };
 
