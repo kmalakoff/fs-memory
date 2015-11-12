@@ -4,7 +4,8 @@ import bodec from 'bodec';
 import ERRORS from 'errno';
 import EventHandlers from '../lib/event-handlers';
 import FSError from '../lib/error';
-import {findNode, findChild, writeData} from '../lib/utils';
+import {findNode, findChild} from '../lib/utils';
+import {Node} from 'forestry';
 
 export default function writeFileSync(path, data, encoding) {
   var parts = path.split(sep), name = parts.pop(), parentPath = parts.join(sep);
@@ -19,6 +20,7 @@ export default function writeFileSync(path, data, encoding) {
   }
   else {
     node = new Node({isDirectory: false, name, stat: {size: 0, ctime: now, mtime: now, birthtime: now}});
+    parentNode.addChild(node);
   }
   node.data.contents = encoding ? bodec.fromString(data, encoding) : bodec.copy(data);
   node.data.stat = _.defaults({size: node.data.contents.length, mtime: now}, node.data.stat || {})

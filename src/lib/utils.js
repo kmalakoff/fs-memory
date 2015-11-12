@@ -33,12 +33,12 @@ export function findNode(current, path) {
 }
 
 export function findChild(node, name) {
-  if (!node.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, node.name);
+  if (!node.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, node.data.name);
   return _.find(node.children, childNode => childNode.data.name === name);
 };
 export function removeChild(node, name) {
   let index = _.findIndex(node.children, childNode => childNode.data.name === name);
-  if (index<0) throw new FSError(ERRORS.code.ENOENT);
+  if (index<0) return null;
   let childNode = node.children[index];
   node.children.splice(index, 1);
   return childNode;

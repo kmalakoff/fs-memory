@@ -14,7 +14,8 @@ export default function mkdirSync(path) {
     if (!node.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, path);
   }
   else {
-    parentNode.addChild(new Node({isDirectory: true, name}));
+    node = new Node({isDirectory: true, name});
+    parentNode.addChild(node);
     EventHandlers.emit('addDir', path);
   }
 }

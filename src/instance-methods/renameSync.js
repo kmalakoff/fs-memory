@@ -9,7 +9,7 @@ export default function renameSync(oldPath, newPath) {
 
   let node = findNode(this.rootNode, oldPath);
   if (!node) throw new FSError(ERRORS.code.ENOENT, oldPath);
-  removeChild(node.parent, node.name);
+  removeChild(node.parent, node.data.name);
 
   let parts = newPath.split(sep), name = parts.pop(), parentPath = parts.join(sep);
   let parentNode = findNode(this.rootNode, parentPath);
@@ -21,10 +21,6 @@ export default function renameSync(oldPath, newPath) {
   node.data.name = name;
   parentNode.addChild(node);
 
-  if (node.data.isDirectory) {
-    !existingNode || EventHandlers.emit('addDir', newPath);
-  }
-  else {
-    EventHandlers.emit(existingNode ? 'update' : 'add', newPath);
-  }
+  if (node.data.isDirectory) !existingNode || EventHandlers.emit('addDir', newPath);
+  else EventHandlers.emit(existingNode ? 'update' : 'add', newPath);
 }
