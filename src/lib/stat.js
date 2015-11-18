@@ -1,11 +1,12 @@
+import {isFile, isDirectory} from './mode';
+
 export default class Stat {
   constructor(node) {
     Object.assign(this, node.data.stat || {});
-    if (node.data.isDirectory) this.__d = true;
   }
 
-  isFile() { return !this.__d }
-  isDirectory() { return this.__d }
+  isFile() { return isFile(this.mode); }
+  isDirectory() { return isDirectory(this.mode); }
   isBlockDevice() { return false; }
   isCharacterDevice() { return false; }
   isSymbolicLink() { return false; }

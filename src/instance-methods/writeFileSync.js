@@ -6,6 +6,7 @@ import EventHandlers from '../lib/event-handlers';
 import FSError from '../lib/error';
 import {findNode, findChild} from '../lib/utils';
 import {Node} from 'forestry';
+import {nodeIsDirectory} from '../lib/mode';
 
 export default function writeFileSync(path, data, encoding) {
   var parts = path.split(sep), name = parts.pop(), parentPath = parts.join(sep);
@@ -16,10 +17,10 @@ export default function writeFileSync(path, data, encoding) {
   var node = findChild(parentNode, name);
   var exists = !!node;
   if (node) {
-    if (node.data.isDirectory) throw new FSError(ERRORS.code.EISDIR, path);
+    if (nodeIsDirectory(node)) throw new FSError(ERRORS.code.EISDIR, path);
   }
   else {
-    node = new Node({isDirectory: false, name, stat: {size: 0, ctime: now, mtime: now, birthtime: now}});
+    node = new Node({name, stat: {mode: 0o100000, size: 0, ctime: now, mtime: now, birthtime: now}});
     parentNode.addChild(node);
   }
   node.data.contents = encoding ? bodec.fromString(data, encoding) : bodec.copy(data);

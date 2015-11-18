@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import dz from 'dezalgo';
 
+import createReadStream from './createReadStream';
 import existsSync from './existsSync';
 import lstatSync from './lstatSync';
 import lstatSyncNoException from './lstatSyncNoException';
@@ -16,6 +17,7 @@ import writeFileSync from './writeFileSync';
 
 // sync methods
 let instanceMethods = {
+  createReadStream,
   existsSync,
   lstatSync,
   lstatSyncNoException,

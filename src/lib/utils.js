@@ -3,6 +3,7 @@ import _ from 'lodash';
 import ERRORS from 'errno';
 import FSError from '../lib/error';
 import {Node} from 'forestry';
+import {nodeIsDirectory} from '../lib/mode';
 
 export function isName(name) { return (name !== '.') && (name !== '..'); }
 
@@ -33,7 +34,7 @@ export function findNode(current, path) {
 }
 
 export function findChild(node, name) {
-  if (!node.data.isDirectory) throw new FSError(ERRORS.code.ENOTDIR, node.data.name);
+  if (!nodeIsDirectory(node)) throw new FSError(ERRORS.code.ENOTDIR, node.data.name);
   return _.find(node.children, childNode => childNode.data.name === name);
 };
 export function removeChild(node, name) {

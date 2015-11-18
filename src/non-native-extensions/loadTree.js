@@ -1,6 +1,7 @@
 import path from 'path';
 import {Node} from 'forestry';
 import bodec from 'bodec';
+import {nodeIsDirectory} from '../lib/mode';
 
 var DATE_PROPERTIES = ['atime', 'mtime', 'ctime', 'birthtime'];
 
@@ -18,7 +19,7 @@ function deserializeData(data) {
 
 function createNode(dataNode) {
   var data = deserializeData(dataNode.data);
-  if (!dataNode.data.isDirectory) return new Node(data)
+  if (!nodeIsDirectory(dataNode)) return new Node(data)
 
   let node = new Node(data);
   dataNode.children.forEach(childDataNode => node.addChild(createNode(childDataNode)));
