@@ -34,9 +34,9 @@ let instanceMethods = {
 ['lstat', 'mkdir', 'readdir', 'readFile', 'realpath', 'rename', 'stat', 'unlink', 'writeFile'].forEach(name => {
   instanceMethods[name] = function() {
     let args = _.toArray(arguments);
-    let result, callback = immediate(args.pop());
+    let result, callback = args.pop();
     try { result = this[`${name}Sync`].apply(this, args); } catch(err) { return callback(err); }
-    return callback(null, result);
+    immediate(() => { callback(null, result); });
   };
 });
 
@@ -44,8 +44,8 @@ let instanceMethods = {
 ['exists'].forEach(name => {
   instanceMethods[name] = function() {
     let args = _.toArray(arguments);
-    let result, callback = immediate(args.pop());
-    callback(this[`${name}Sync`].apply(this, args));
+    let result, callback = args.pop();
+    immediate(() => { callback(this[`${name}Sync`].apply(this, args)); });
   };
 });
 
