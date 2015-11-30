@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import dz from 'dezalgo';
+import setimmediate from 'setimmediate';
 
 import createReadStream from './createReadStream';
 import existsSync from './existsSync';
@@ -34,7 +34,7 @@ let instanceMethods = {
 ['lstat', 'mkdir', 'readdir', 'readFile', 'realpath', 'rename', 'stat', 'unlink', 'writeFile'].forEach(name => {
   instanceMethods[name] = function() {
     let args = _.toArray(arguments);
-    let result, callback = dz(args.pop());
+    let result, callback = setImmediate(args.pop());
     try { result = this[`${name}Sync`].apply(this, args); } catch(err) { return callback(err); }
     return callback(null, result);
   };
@@ -44,7 +44,7 @@ let instanceMethods = {
 ['exists'].forEach(name => {
   instanceMethods[name] = function() {
     let args = _.toArray(arguments);
-    let result, callback = dz(args.pop());
+    let result, callback = setImmediate(args.pop());
     callback(this[`${name}Sync`].apply(this, args));
   };
 });
