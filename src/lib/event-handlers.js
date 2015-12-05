@@ -15,7 +15,7 @@ export default class EventHandlers {
   }
 
   static remove(owner) {
-    handlers = handlers.filter((handler) => handler.owner === owner);
+    handlers = handlers.filter((handler) => handler.owner !== owner);
   }
 
   static emit(event, path) {
