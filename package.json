@@ -13,17 +13,19 @@
   "keywords": [
     "fs",
     "memory",
+    "fs-memory",
     "webpack",
+    "browser",
+    "mock",
     "test"
   ],
-  "author": "https://github.com/kmalakoff",
+  "author": "Kevin Malakoff <kmalakoff@gmail.com> (https://github.com/kmalakoff)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kmalakoff/fs-memory/issues"
   },
   "homepage": "https://github.com/kmalakoff/fs-memory#readme",
   "dependencies": {
-    "browser-path": "0.0.1",
     "errno": "^0.1.4",
     "forestry": "^0.4.1",
     "immediate": "^3.2.2"
