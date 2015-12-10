@@ -1,6 +1,6 @@
 {
   "name": "fs-memory",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "An in-memory file system implementation",
   "main": "index.js",
   "scripts": {
