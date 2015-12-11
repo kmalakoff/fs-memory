@@ -1,6 +1,6 @@
 {
   "name": "fs-memory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An in-memory file system implementation",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/kmalakoff/fs-memory#readme",
   "dependencies": {
     "errno": "^0.1.4",
+    "eventemitter3": "^1.1.1",
     "forestry": "^0.4.1",
     "immediate": "^3.2.2"
   }
