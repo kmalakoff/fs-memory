@@ -1,5 +1,6 @@
-import {sep} from 'path';
-import _ from 'lodash';
+import sysPath from 'path';
+import find from 'lodash.find';
+import findIndex from 'lodash.findindex';
 import ERRORS from 'errno';
 import FSError from '../lib/error';
 import {Node} from 'forestry';
@@ -16,7 +17,7 @@ export function findNextNode(node, name) {
 }
 
 export function findNode(current, path) {
-  let pathParts = path.split(sep);
+  let pathParts = path.split(sysPath.sep);
 
   // root
   if (pathParts[0] == '') {
@@ -35,10 +36,10 @@ export function findNode(current, path) {
 
 export function findChild(node, name) {
   if (!nodeIsDirectory(node)) throw new FSError(ERRORS.code.ENOTDIR, node.data.name);
-  return _.find(node.children, childNode => childNode.data.name === name);
+  return find(node.children, childNode => childNode.data.name === name);
 };
 export function removeChild(node, name) {
-  let index = _.findIndex(node.children, childNode => childNode.data.name === name);
+  let index = findIndex(node.children, childNode => childNode.data.name === name);
   if (index<0) return null;
   let childNode = node.children[index];
   node.children.splice(index, 1);

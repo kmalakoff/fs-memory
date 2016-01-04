@@ -1,4 +1,3 @@
-import pathModule from 'path';
 import EventEmitter from 'eventemitter3';
 import EventHandlers from './event-handlers';
 import nullCheck from './null-check';

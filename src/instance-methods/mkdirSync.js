@@ -1,4 +1,4 @@
-import {sep} from 'path';
+import sysPath from 'path';
 import {findNode, findChild} from '../lib/utils';
 import {Node} from 'forestry';
 import EventHandlers from '../lib/event-handlers';
@@ -7,7 +7,7 @@ import ERRORS from 'errno';
 import {nodeIsDirectory} from '../lib/mode';
 
 export default function mkdirSync(path) {
-  var parts = path.split(sep), name = parts.pop(), parentPath = parts.join(sep);
+  var parts = path.split(sysPath.sep), name = parts.pop(), parentPath = parts.join(sysPath.sep);
   let parentNode = findNode(this.rootNode, parentPath);
   if (!parentNode) throw new FSError(ERRORS.code.ENOENT, parentPath);
   var node = findChild(parentNode, name);

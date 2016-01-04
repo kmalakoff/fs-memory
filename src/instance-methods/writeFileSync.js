@@ -1,5 +1,6 @@
-import {sep} from 'path';
-import _ from 'lodash';
+import sysPath from 'path';
+import isString from 'lodash.isstring';
+import defaults from 'lodash.defaults';
 import bodec from 'bodec';
 import ERRORS from 'errno';
 import EventHandlers from '../lib/event-handlers';
@@ -10,7 +11,7 @@ import {nodeIsDirectory} from '../lib/mode';
 import encodings from '../lib/encodings';
 
 export default function writeFileSync(path, data, options) {
-  var parts = path.split(sep), name = parts.pop(), parentPath = parts.join(sep);
+  var parts = path.split(sysPath.sep), name = parts.pop(), parentPath = parts.join(sysPath.sep);
   let parentNode = findNode(this.rootNode, parentPath);
   if (!parentNode) throw new FSError(ERRORS.code.ENOENT, parentPath);
 
@@ -26,8 +27,8 @@ export default function writeFileSync(path, data, options) {
   }
 
   let encoding = !options || options.encoding || options;
-  let stringEncoding = _.isString(encoding) && ~encodings.string.indexOf(encoding) ? encoding : undefined;
+  let stringEncoding = isString(encoding) && ~encodings.string.indexOf(encoding) ? encoding : undefined;
   node.data.contents = stringEncoding ? bodec.fromString(data, stringEncoding) : bodec.copy(data);
-  node.data.stat = _.defaults({size: node.data.contents.length, mtime: now}, node.data.stat || {})
+  node.data.stat = defaults({size: node.data.contents.length, mtime: now}, node.data.stat || {})
   EventHandlers.emit(exists ? 'update' : 'add', path);
 }

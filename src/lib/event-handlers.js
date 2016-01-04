@@ -1,3 +1,5 @@
+import difference from 'lodash.difference';
+
 class EventHandler {
   constructor(owner, filename, persistent, recursive) {
     this.owner = owner;
@@ -25,7 +27,7 @@ export default class EventHandlers {
     // remove single time handlers
     emitHandlers = emitHandlers.filter((handler) => !handler.persistent);
     if (emitHandlers.length) {
-      handlers = _.difference(handlers, emitHandlers);
+      handlers = difference(handlers, emitHandlers);
       emitHandlers.forEach((handler) => handler.owner.close());
     }
   }

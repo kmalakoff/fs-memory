@@ -1,4 +1,3 @@
-import path from 'path';
 import {Node} from 'forestry';
 import bodec from 'bodec';
 import {nodeIsDirectory} from '../lib/mode';

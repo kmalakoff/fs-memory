@@ -1,5 +1,3 @@
-import {sep} from 'path';
-import _ from 'lodash';
 import ERRORS from 'errno';
 import FSError from '../lib/error';
 import EventHandlers from '../lib/event-handlers';

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import immediate from 'immediate';
 
 import createReadStream from './createReadStream';
@@ -14,6 +13,8 @@ import statSync from './statSync';
 import unlinkSync from './unlinkSync';
 import watch from './watch';
 import writeFileSync from './writeFileSync';
+
+var slice = Array.prototype.slice;
 
 // sync methods
 let instanceMethods = {
@@ -33,7 +34,7 @@ let instanceMethods = {
 // async generated methods
 ['lstat', 'mkdir', 'readdir', 'readFile', 'realpath', 'rename', 'stat', 'unlink', 'writeFile'].forEach(name => {
   instanceMethods[name] = function() {
-    let args = _.toArray(arguments);
+    let args = slice.call(arguments);
     let result, callback = args.pop();
     try { result = this[`${name}Sync`].apply(this, args); } catch(err) { return callback(err); }
     immediate(() => { callback(null, result); });
@@ -43,7 +44,7 @@ let instanceMethods = {
 // async generated methods - non-standard
 ['exists'].forEach(name => {
   instanceMethods[name] = function() {
-    let args = _.toArray(arguments);
+    let args = slice.call(arguments);
     let result, callback = args.pop();
     immediate(() => { callback(this[`${name}Sync`].apply(this, args)); });
   };
