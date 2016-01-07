@@ -26,5 +26,5 @@ export default class FSWatcher extends EventEmitter {
     const error = errnoException(status, `watch ${filename}`);
     error.filename = filename;
     this.emit('error', error);
-  }
+  };
 }
