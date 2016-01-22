@@ -1,10 +1,12 @@
 import immediate from 'immediate';
 
+import close from './close';
 import createReadStream from './createReadStream';
 import existsSync from './existsSync';
 import lstatSync from './lstatSync';
 import lstatSyncNoException from './lstatSyncNoException';
 import mkdirSync from './mkdirSync';
+import open from './open';
 import readdirSync from './readdirSync';
 import readFileSync from './readFileSync';
 import realpathSync from './realpathSync';
@@ -18,11 +20,13 @@ var slice = Array.prototype.slice;
 
 // sync methods
 let instanceMethods = {
+  close,
   createReadStream,
   existsSync,
   lstatSync,
   lstatSyncNoException,
   mkdirSync,
+  open,
   readdirSync, readFileSync, realpathSync,
   renameSync,
   statSync,
