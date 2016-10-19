@@ -10,7 +10,7 @@
     "babel-preset-stage-2": "^6.17.0"
   },
   "scripts": {
-    "compile": "babel --presets es2015,stage-2 --plugins transform-class-properties -d dist/ index.js",
+    "compile": "babel --presets es2015,stage-2 --plugins transform-class-properties -d dist/ src/",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
