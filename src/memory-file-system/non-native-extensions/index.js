@@ -1,5 +1,5 @@
 import __loadTree from './loadTree';
 
-export default {
+export {
   __loadTree
 };
